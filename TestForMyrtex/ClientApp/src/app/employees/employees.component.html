@@ -1,0 +1,50 @@
+﻿<h1>Сотрудники</h1>
+<h3>Фильтр</h3>
+
+<label>По отделу</label>
+<input type="text" (keyup)="filterByDepartment($event.target.value)" />
+<br />
+<label>По Ф.И.О.</label>
+<input type="text" (keyup)="filterByFullName($event.target.value)" />
+<br />
+<label>По дате рождения</label>
+<input type="date" (change)="filterByDateOfBirth($event.target.value)" />
+<br />
+<label>По дате устройства на работу</label>
+<input type="date" (change)="filterByDateOfEmployment($event.target.value)" />
+<br />
+<label>По заработной плате</label>
+<input type="text" (keyup)="filterBySalary($event.target.value)" />
+<table class="table table-striped" matSort (matSortChange)="sortEmployees($event)">
+    <thead>
+        <tr>
+            <th mat-sort-header="department">Отдел</th>
+            <th mat-sort-header="fullName">Ф.И.О.</th>
+            <th mat-sort-header="dateOfBirth">Дата рождения</th>
+            <th mat-sort-header="dateOfEmployment">Дата устройства на работу</th>
+            <th mat-sort-header="salary">Заработная плата</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td align="center"><button class="btn btn-sm btn-success" (click)="openCreateDialog()">Создать</button></td>
+        </tr>
+        <tr *ngFor="let e of employees">
+            <td>{{e?.department}}</td>
+            <td>{{e?.fullName}}</td>
+            <td>{{e?.dateOfBirth | date:'dd.MM.yyyy'}}</td>
+            <td>{{e?.dateOfEmployment | date:'dd.MM.yyyy'}}</td>
+            <td>{{e?.salary}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="openEditDialog(e)">Изменить</button>
+                <button class="btn btn-sm btn-danger" (click)="openDeleteDialog(e)">Удалить</button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
